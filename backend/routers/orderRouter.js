@@ -94,11 +94,29 @@ orderRouter.get('/province',
 
 orderRouter.get('/ongkir/:id/:weight',
   expressAsyncHandler(async (req, res) => {
+    console.log('req', req)
+    // var options = {
+    //   method: 'POST',
+    //   url: 'https://api.rajaongkir.com/starter/cost',
+    //   headers: {key: 'fae48b5d186bfaa993f687ec1ac499b1', 'content-type': 'application/x-www-form-urlencoded'},
+    //   form: {origin: '419', destination: req.params.id, weight: req.params.weight, courier: 'jne'}
+    // };
+    
+    // request(options, function (error, response, body) {
+    //   if (error) throw new Error(error);
+    //   res.send(JSON.parse(body))
+    // });
+  })
+)
+
+orderRouter.get('/ongkir/:origin/:destination/:weight',
+  expressAsyncHandler(async (req, res) => {
+    console.log('req', req.params)
     var options = {
       method: 'POST',
       url: 'https://api.rajaongkir.com/starter/cost',
       headers: {key: 'fae48b5d186bfaa993f687ec1ac499b1', 'content-type': 'application/x-www-form-urlencoded'},
-      form: {origin: '419', destination: req.params.id, weight: req.params.weight, courier: 'jne'}
+      form: {origin: req.params.origin, destination: req.params.destination, weight: req.params.weight, courier: 'jne'}
     };
     
     request(options, function (error, response, body) {
@@ -107,7 +125,6 @@ orderRouter.get('/ongkir/:id/:weight',
     });
   })
 )
-
 
 orderRouter.post(
   '/',
