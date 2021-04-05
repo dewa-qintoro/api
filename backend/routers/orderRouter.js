@@ -94,22 +94,75 @@ orderRouter.get('/province',
 
 orderRouter.get('/ongkir/:id/:weight',
   expressAsyncHandler(async (req, res) => {
-    console.log('req', req)
-    // var options = {
-    //   method: 'POST',
-    //   url: 'https://api.rajaongkir.com/starter/cost',
-    //   headers: {key: 'fae48b5d186bfaa993f687ec1ac499b1', 'content-type': 'application/x-www-form-urlencoded'},
-    //   form: {origin: '419', destination: req.params.id, weight: req.params.weight, courier: 'jne'}
-    // };
+    // console.log('req', req)
+    var options = {
+      method: 'POST',
+      url: 'https://api.rajaongkir.com/starter/cost',
+      headers: {key: 'fae48b5d186bfaa993f687ec1ac499b1', 'content-type': 'application/x-www-form-urlencoded'},
+      form: {origin: '419', destination: req.params.id, weight: req.params.weight, courier: 'pos'}
+      // form: {origin: '419', destination: req.params.id, weight: req.params.weight, courier: ['jne', 'pos']}
+    };
     
-    // request(options, function (error, response, body) {
-    //   if (error) throw new Error(error);
-    //   res.send(JSON.parse(body))
-    // });
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+      // console.log(JSON.parse(body))
+      res.send(JSON.parse(body))
+    });
   })
 )
 
 orderRouter.get('/ongkir/:origin/:destination/:weight',
+  expressAsyncHandler(async (req, res) => {
+    console.log('req', req.params)
+    var options = {
+      method: 'POST',
+      url: 'https://api.rajaongkir.com/starter/cost',
+      headers: {key: 'fae48b5d186bfaa993f687ec1ac499b1', 'content-type': 'application/x-www-form-urlencoded'},
+      form: {origin: req.params.origin, destination: req.params.destination, weight: req.params.weight, courier: 'jne'}
+    };
+    
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+      res.send(JSON.parse(body))
+    });
+  })
+)
+
+orderRouter.get('/ongkir/pos/:origin/:destination/:weight',
+  expressAsyncHandler(async (req, res) => {
+    console.log('req', req.params)
+    var options = {
+      method: 'POST',
+      url: 'https://api.rajaongkir.com/starter/cost',
+      headers: {key: 'fae48b5d186bfaa993f687ec1ac499b1', 'content-type': 'application/x-www-form-urlencoded'},
+      form: {origin: req.params.origin, destination: req.params.destination, weight: req.params.weight, courier: 'pos'}
+    };
+    
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+      res.send(JSON.parse(body))
+    });
+  })
+)
+
+orderRouter.get('/ongkir/tiki/:origin/:destination/:weight',
+  expressAsyncHandler(async (req, res) => {
+    console.log('req', req.params)
+    var options = {
+      method: 'POST',
+      url: 'https://api.rajaongkir.com/starter/cost',
+      headers: {key: 'fae48b5d186bfaa993f687ec1ac499b1', 'content-type': 'application/x-www-form-urlencoded'},
+      form: {origin: req.params.origin, destination: req.params.destination, weight: req.params.weight, courier: 'tiki'}
+    };
+    
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+      res.send(JSON.parse(body))
+    });
+  })
+)
+
+orderRouter.get('/ongkir/jne/:origin/:destination/:weight',
   expressAsyncHandler(async (req, res) => {
     console.log('req', req.params)
     var options = {
