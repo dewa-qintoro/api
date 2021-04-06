@@ -9,21 +9,30 @@ import uploadRouter from './routers/uploadRouter.js'
 import awsRoute from './routers/uploadRoute.js'
 import confirmRouter from './routers/confirmRoute.js'
 import cors from 'cors'
+import cloudinary from 'cloudinary'
 
 dotenv.config()
+
+// if (typeof (process.env.CLOUDINARY_URL) === 'undefined') {
+//   console.warn('!! cloudinary config is undefined !!');
+//   console.warn('export CLOUDINARY_URL or set dotenv file');
+// } else {
+//   console.log('cloudinary config:');
+//   console.log(cloudinary.config());
+// }
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-Mongoose.connect(process.env.MONGODB_URL || 'mongodb+srv://aruspinggir:admin@ecommerce.iclbk.mongodb.net/test', {
+Mongoose.connect(process.env.MONGODB_URL_LOCAL || 'mongodb+srv://aruspinggir:admin@ecommerce.iclbk.mongodb.net/test', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   bufferCommands: false,
 })
 
-// app.use('/api/uploads', uploadRouter)
+
 app.use('/api/uploads', awsRoute)
 app.use('/api/confirm', confirmRouter)
 app.use('/api/users', userRouter)

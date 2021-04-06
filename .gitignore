@@ -27,3 +27,4 @@ package-lock.json
 /uploads/*.jpg
 ori
 hide
+/uploads
